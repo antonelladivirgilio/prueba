@@ -3,15 +3,18 @@ import { getCurrencies } from '../services/getCurrencies'
 
 export function useCurrencies() {
   const [currencies, setCurrencies] = useState([])
+  const [currenciesCodes, setCurrenciesCodes] = useState('')
 
   const handleGetCurrencies = async () => {
-    const currencies = await getCurrencies()
+    const { currencies, currencyCodes } = await getCurrencies()
+
     setCurrencies(currencies)
+    setCurrenciesCodes(currencyCodes)
   }
 
   useEffect(() => {
     handleGetCurrencies()
   }, [])
 
-  return { currencies, handleGetCurrencies }
+  return { currencies, currenciesCodes, handleGetCurrencies }
 }
