@@ -1,15 +1,17 @@
 export const getCurrencies = async () => {
   const response = await fetch('https://api.vatcomply.com/currencies')
-  const currencies = await response.json()
+  const currencyList = await response.json()
 
-  return getMappedCurrencies({ currencies })
+  return getMappedCurrencies({ currencyList })
 }
 
-export const getMappedCurrencies = ({ currencies }) => {
-  const currencyCodes = Object.keys(currencies)
+export const getMappedCurrencies = ({ currencyList }) => {
+  const codes = Object.keys(currencyList)
 
-  return currencyCodes.map((code) => ({
+  const currencies = codes.map((code) => ({
     code,
-    name: currencies[code]?.name
+    name: currencyList[code]?.name
   }))
+
+  return { currencies, codes }
 }
