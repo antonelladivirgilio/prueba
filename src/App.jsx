@@ -1,12 +1,16 @@
 import './App.css'
 import { Form } from './components/Form'
+import { Header } from './components/Header'
+import { Main } from './components/Main'
 
-function App () {
+function App() {
+  const bannerContent = `Titulo de la pagina`
   return (
     <>
-
-     <h1>Conversor de moneda</h1>
-     <Form />
+      <Header text="Currency exchange" />
+      <Main bannerContent={bannerContent}>
+        <Form />
+      </Main>
     </>
   )
 }
