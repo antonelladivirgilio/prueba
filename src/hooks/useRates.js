@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { getRates } from '../services/getCurrenciesRate'
+import { getRates } from '../services/getRates'
 
 export function useRates() {
   const [rates, setRates] = useState(0)
