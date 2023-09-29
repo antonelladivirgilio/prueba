@@ -15,9 +15,6 @@ export function useForm(initialState) {
 
   const updateFormValues = ({ target }) => {
     const { name, value } = target
-
-    console.log({ ...form, [name]: value })
-
     setForm({ ...form, [name]: value })
   }
 
