@@ -1,0 +1,6 @@
+.label {
+    font-size: var(--text-base);
+    font-weight: 600;
+    display: block;
+    padding-bottom: 16px;
+}
