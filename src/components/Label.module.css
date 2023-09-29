@@ -1,5 +1,6 @@
 .label {
     font-size: var(--text-base);
+    color: var( --clr-black-100);
     font-weight: 600;
     display: block;
     padding-bottom: 16px;
