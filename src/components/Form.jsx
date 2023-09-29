@@ -5,6 +5,7 @@ import { useCurrencies } from '../hooks/useCurrencies'
 import { convertCurrency } from '../utils/convertCurrency'
 import { useRates } from '../hooks/useRates'
 import { Label } from './Label'
+import { Select } from './Select'
 
 export function Form() {
   const id = useId()
@@ -58,9 +59,9 @@ export function Form() {
         </div>
         <div>
           <Label htmlFor={`${id}-baseCurrency`}>From</Label>
-          <select
-            name="baseCurrency"
+          <Select
             id={`${id}-baseCurrency`}
+            name="baseCurrency"
             value={form.baseCurrency}
             onChange={updateFormValues}
           >
@@ -69,14 +70,14 @@ export function Form() {
                 {currency.name}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
         <button>ss</button>
         <div>
           <Label htmlFor={`${id}-convertTo`}>To</Label>
-          <select
-            name="convertTo"
+          <Select
             id={`${id}-convertTo`}
+            name="convertTo"
             value={form.convertTo}
             onChange={updateFormValues}
           >
@@ -85,7 +86,7 @@ export function Form() {
                 {currency.name}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
       </form>
 
