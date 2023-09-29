@@ -1,8 +1,10 @@
+import styles from './Form.module.css'
 import { useEffect, useId, useState } from 'react'
 import { useForm } from '../hooks/useForm'
 import { useCurrencies } from '../hooks/useCurrencies'
 import { convertCurrency } from '../utils/convertCurrency'
 import { useRates } from '../hooks/useRates'
+import { Label } from './Label'
 
 export function Form() {
   const id = useId()
@@ -43,42 +45,48 @@ export function Form() {
 
   return (
     <>
-      <form>
-        <label htmlFor={`${id}-amount`}>Amount</label>
-        <input
-          name="amount"
-          id={`${id}-amount`}
-          value={form.amount}
-          onChange={handleAmountChange}
-        />
+      <form className={styles.form}>
+        <div>
+          <Label htmlFor={`${id}-amount`}>Amount</Label>
 
-        <label htmlFor={`${id}-baseCurrency`}>From</label>
-        <select
-          name="baseCurrency"
-          id={`${id}-baseCurrency`}
-          value={form.baseCurrency}
-          onChange={updateFormValues}
-        >
-          {currencies.map((currency) => (
-            <option key={`from-${currency.code}`} value={currency.code}>
-              {currency.name}
-            </option>
-          ))}
-        </select>
-
-        <label htmlFor={`${id}-convertTo`}>To</label>
-        <select
-          name="convertTo"
-          id={`${id}-convertTo`}
-          value={form.convertTo}
-          onChange={updateFormValues}
-        >
-          {currencies.map((currency) => (
-            <option key={`to-${currency.code}`} value={currency.code}>
-              {currency.name}
-            </option>
-          ))}
-        </select>
+          <input
+            name="amount"
+            id={`${id}-amount`}
+            value={form.amount}
+            onChange={handleAmountChange}
+          />
+        </div>
+        <div>
+          <Label htmlFor={`${id}-baseCurrency`}>From</Label>
+          <select
+            name="baseCurrency"
+            id={`${id}-baseCurrency`}
+            value={form.baseCurrency}
+            onChange={updateFormValues}
+          >
+            {currencies.map((currency) => (
+              <option key={`from-${currency.code}`} value={currency.code}>
+                {currency.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <button>ss</button>
+        <div>
+          <Label htmlFor={`${id}-convertTo`}>To</Label>
+          <select
+            name="convertTo"
+            id={`${id}-convertTo`}
+            value={form.convertTo}
+            onChange={updateFormValues}
+          >
+            {currencies.map((currency) => (
+              <option key={`to-${currency.code}`} value={currency.code}>
+                {currency.name}
+              </option>
+            ))}
+          </select>
+        </div>
       </form>
 
       {form && (
