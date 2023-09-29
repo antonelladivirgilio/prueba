@@ -1,7 +1,6 @@
 import { useEffect, useId, useState } from 'react'
 import { useForm } from '../hooks/useForm'
 import { useCurrencies } from '../hooks/useCurrencies'
-import { getCurrenciesRate } from '../services/getCurrenciesRate'
 import { convertCurrency } from '../utils/convertCurrency'
 import { useRates } from '../hooks/useRates'
 
@@ -15,17 +14,8 @@ export function Form() {
 
   const { form, validateNumberInput, updateFormValues } = useForm(initialState)
   const { currencies } = useCurrencies()
-
-  const [from, setFrom] = useState({
-    code: 'USD',
-    rate: null
-  })
-
   const { rates, updateRates } = useRates()
 
-  const [amount, setAmount] = useState('1')
-
-  const [to, setTo] = useState({ code: 'EUR', rate: null })
   const [convertedAmount, setConvertedAmount] = useState(0)
 
   const handleAmountChange = (event) => {
@@ -33,16 +23,10 @@ export function Form() {
     validateNumberInput({ target })
   }
 
-  const handleSubmit = async (event) => {
-    console.log('handlesubmit')
-    event.preventDefault()
-  }
-
   useEffect(() => {
     const baseCurrency = rates[form.baseCurrency]
     const convertTo = rates[form.convertTo]
 
-    console.log({ baseCurrency, convertTo })
     const convertedAmount = convertCurrency({
       amountToConvert: form.amount,
       fromCurrency: baseCurrency,
@@ -59,7 +43,7 @@ export function Form() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form>
         <label htmlFor={`${id}-amount`}>Amount</label>
         <input
           name="amount"
@@ -95,8 +79,6 @@ export function Form() {
             </option>
           ))}
         </select>
-
-        <button>convertir</button>
       </form>
 
       {form && (
