@@ -6,7 +6,6 @@ export function useRates() {
 
   const updateRates = async ({ baseCurrency }) => {
     const newRates = await getRates({ baseCurrency })
-    console.log({ newRates })
     setRates(newRates)
   }
 
