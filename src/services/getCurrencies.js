@@ -1,5 +1,7 @@
+import { API_GET_CURRENCIES } from '../contants'
+
 export const getCurrencies = async () => {
-  const response = await fetch('https://api.vatcomply.com/currencies')
+  const response = await fetch(API_GET_CURRENCIES)
   const currencyList = await response.json()
 
   return getMappedCurrencies({ currencyList })
