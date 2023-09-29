@@ -2,62 +2,61 @@ import { useEffect, useId, useState } from 'react'
 import { useForm } from '../hooks/useForm'
 import { useCurrencies } from '../hooks/useCurrencies'
 import { getCurrenciesRate } from '../services/getCurrenciesRate'
+import { convertCurrency } from '../utils/convertCurrency'
 
 export function Form() {
   const id = useId()
   const { validateNumberInput } = useForm()
+  const { currencies } = useCurrencies()
 
   const [amount, setAmount] = useState('1')
   const [from, setFrom] = useState({
     code: 'USD',
-    rate: 0
+    rate: null
   })
-  const [to, setTo] = useState({ code: 'EUR', rate: 0 })
-  const [finalAmount, setFinalAmount] = useState(0)
-  const { currencies } = useCurrencies()
+
+  const [to, setTo] = useState({ code: 'EUR', rate: null })
+  const [convertedAmount, setConvertedAmount] = useState(0)
 
   const handleChangeAmount = (event) => {
     const { value } = event.target
     setAmount(validateNumberInput(value))
   }
 
-  const handleChangeFrom = (event) => {
+  const handleUpdateRates = async (event) => {
+    const { name } = event.target
+    const currencyCode = event.target.value
+
+    const fromCurrency = name === 'from' ? currencyCode : from.code
+    const toCurrency = name === 'to' ? currencyCode : to.code
+
+    const rates = await getCurrenciesRate({ fromCurrency, toCurrency })
+
     setFrom({
-      ...from,
-      code: event.target.value
+      code: fromCurrency,
+      rate: rates[fromCurrency]
     })
-  }
 
-  const handleChangeTo = (event) => {
     setTo({
-      ...to,
-      code: event.target.value
+      code: toCurrency,
+      rate: rates[toCurrency]
     })
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
+    console.log('handlesubmit')
     event.preventDefault()
-    //algo
-
-    const updateRates = async () => {
-      const rates = await getCurrenciesRate({ from: from.code, to: to.code })
-      return rates
-    }
-
-    if (from.code !== to.code) {
-      updateRates().then((response) => {
-        setFrom({
-          ...from,
-          rate: response[from.code]
-        })
-        setTo({
-          ...to,
-          rate: response[to.code]
-        })
-        setFinalAmount(((amount * from.rate) / to.rate).toFixed(2))
-      })
-    }
   }
+
+  useEffect(() => {
+    const convertedAmount = convertCurrency({
+      amountToConvert: amount,
+      fromCurrency: from.rate,
+      toCurrency: to.rate
+    })
+
+    setConvertedAmount(convertedAmount)
+  }, [amount, from, to])
 
   return (
     <>
@@ -76,7 +75,7 @@ export function Form() {
           name="from"
           id={`${id}-from-currency`}
           value={from.code}
-          onChange={handleChangeFrom}
+          onChange={handleUpdateRates}
         >
           {currencies.map((currency) => (
             <option key={`from-${currency.code}`} value={currency.code}>
@@ -90,7 +89,7 @@ export function Form() {
           name="to"
           id={`${id}-to-currency`}
           value={to.code}
-          onChange={handleChangeTo}
+          onChange={handleUpdateRates}
         >
           {currencies.map((currency) => (
             <option key={`to-${currency.code}`} value={currency.code}>
@@ -103,10 +102,11 @@ export function Form() {
       </form>
 
       <h1>
-        {amount} {from.code} = {finalAmount} {to.code}
+        {amount} {from?.code} = {convertedAmount} {to?.code}
       </h1>
+
       <p>
-        1 {from.code} = {to.rate} {to.code}
+        1 {from?.code} = {to?.rate?.toFixed(2)} {to?.code}
       </p>
     </>
   )
