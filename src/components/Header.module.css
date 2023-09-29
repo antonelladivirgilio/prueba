@@ -1,0 +1,17 @@
+.header {
+    background-color: var(--clr-blue-100);
+    color: var(--clr-white-100);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    height: 60px;
+    line-height: 60px;
+    box-shadow: var(--box-shadow-25);
+    padding: 0 50px;
+}
+
+@media (max-width: 768px) {
+
+    .header {
+        padding: 0 30px;
+    }
+}
