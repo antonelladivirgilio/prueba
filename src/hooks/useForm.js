@@ -1,11 +1,25 @@
 import { useState } from 'react'
 
-export function useForm() {
-  const validateNumberInput = (value) => {
+export function useForm(initialState) {
+  const [form, setForm] = useState(initialState)
+
+  const validateNumberInput = ({ target }) => {
+    const { name, value } = target
     if (value.startsWith(' ')) return
 
-    return value.replace(/[^0-9]/g, '')
+    setForm({
+      ...form,
+      [name]: value.replace(/[^0-9]/g, '')
+    })
   }
 
-  return { validateNumberInput }
+  const updateFormValues = ({ target }) => {
+    const { name, value } = target
+
+    console.log({ ...form, [name]: value })
+
+    setForm({ ...form, [name]: value })
+  }
+
+  return { form, validateNumberInput, updateFormValues }
 }
