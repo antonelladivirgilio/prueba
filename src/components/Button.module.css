@@ -5,6 +5,7 @@
     border: 1px solid var(--clr-light-blue-100);
     border-radius: 50%;
     cursor: pointer;
+    padding: 0;
 
     align-self: flex-end;
 }
