@@ -9,6 +9,7 @@ import { Select } from './Select'
 import { Input } from './Input'
 import { SwapCurrency } from './Icons'
 import { Button } from './Button'
+import { Footer } from './Footer'
 
 export function Form() {
   const id = useId()
@@ -119,9 +120,7 @@ export function Form() {
             informational purposes only. You won’t receive this rate when
             sending money.
           </p>
-          <p className={styles.form__credits}>
-            Euro to US Dollar conversion — Last updated Dec 15, 2022, 19:17 UTC
-          </p>
+          <Footer />
         </div>
       </section>
     </>
