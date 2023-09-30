@@ -5,8 +5,12 @@ export function useRates() {
   const [rates, setRates] = useState(0)
 
   const updateRates = async ({ baseCurrency }) => {
-    const newRates = await getRates({ baseCurrency })
-    setRates(newRates)
+    try {
+      const newRates = await getRates({ baseCurrency })
+      setRates(newRates)
+    } catch (error) {
+      throw new Error('Error getting rates')
+    }
   }
 
   return { rates, updateRates }
