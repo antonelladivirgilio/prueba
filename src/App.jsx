@@ -12,7 +12,6 @@ function App() {
       <Main bannerContent={bannerContent}>
         <Form />
       </Main>
-      <Footer />
     </div>
   )
 }
