@@ -1,4 +1,4 @@
-import { Icon } from './Icon'
+import { ChevronDown } from './Icons'
 import styles from './Select.module.css'
 
 export function Select({ id, name, onChange, value, children }) {
@@ -13,8 +13,10 @@ export function Select({ id, name, onChange, value, children }) {
       >
         {children}
       </select>
-      <span className={styles.select__arrow}>
-        <Icon type="arrow-down" />
+      <span className={styles.select__chevron}>
+        <span className={styles['select__chevron--down']}>
+          <ChevronDown />
+        </span>
       </span>
     </div>
   )
