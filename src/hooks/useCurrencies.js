@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react'
 import { getCurrencies } from '../services/getCurrencies'
+import { useCurrencyStore } from './useCurrencyStore'
 
 export function useCurrencies() {
+  const { updateCurrencyStore } = useCurrencyStore()
   const [currencies, setCurrencies] = useState([])
-  const [currenciesCodes, setCurrenciesCodes] = useState('')
 
   const handleGetCurrencies = async () => {
-    const { currencies, currencyCodes } = await getCurrencies()
+    const { currencies, currenciesObj } = await getCurrencies()
 
+    updateCurrencyStore({ currencies: currenciesObj })
     setCurrencies(currencies)
-    setCurrenciesCodes(currencyCodes)
   }
 
   useEffect(() => {
     handleGetCurrencies()
   }, [])
 
-  return { currencies, currenciesCodes, handleGetCurrencies }
+  return { currencies, handleGetCurrencies }
 }
