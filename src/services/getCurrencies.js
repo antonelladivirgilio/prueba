@@ -1,10 +1,15 @@
 import { API_GET_CURRENCIES } from '../contants'
 
 export const getCurrencies = async () => {
-  const response = await fetch(API_GET_CURRENCIES)
-  const currencyList = await response.json()
+  try {
+    const response = await fetch(API_GET_CURRENCIES)
+    const currenciesObj = await response.json()
+    const { currencies } = getMappedCurrencies({ currencyList: currenciesObj })
 
-  return getMappedCurrencies({ currencyList })
+    return { currencies, currenciesObj }
+  } catch (error) {
+    throw new Error('Error getting currencies')
+  }
 }
 
 export const getMappedCurrencies = ({ currencyList }) => {
