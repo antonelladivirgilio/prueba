@@ -51,6 +51,7 @@
 @media (max-width: 768px) {
   .form {
     grid-template-columns: repeat(1, auto);
+    gap: 30px;
   }
 
   .form__amount {
