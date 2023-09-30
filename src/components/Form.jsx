@@ -10,13 +10,16 @@ import { Input } from './Input'
 import { SwapCurrency } from './Icons'
 import { Button } from './Button'
 import { Footer } from './Footer'
+import { useCurrencyStore } from '../hooks/useCurrencyStore'
 
 export function Form() {
   const id = useId()
+  const { amount, baseCurrency, convertTo, updateCurrencyStore } =
+    useCurrencyStore()
   const initialState = {
-    amount: 1,
-    baseCurrency: 'USD',
-    convertTo: 'EUR'
+    amount,
+    baseCurrency,
+    convertTo
   }
 
   const { form, validateNumberInput, updateFormValues } = useForm(initialState)
@@ -31,13 +34,21 @@ export function Form() {
   }
 
   useEffect(() => {
-    const baseCurrency = rates[form.baseCurrency]
-    const convertTo = rates[form.convertTo]
+    const updatedState = {
+      amount: form.amount,
+      baseCurrency: form.baseCurrency,
+      convertTo: form.convertTo
+    }
+
+    updateCurrencyStore({ ...updatedState })
+
+    const baseCurrencyValue = rates?.[form.baseCurrency]
+    const convertToValue = rates?.[form.convertTo]
 
     const convertedAmount = convertCurrency({
       amountToConvert: form.amount,
-      fromCurrency: baseCurrency,
-      toCurrency: convertTo
+      fromCurrency: baseCurrencyValue,
+      toCurrency: convertToValue
     })
 
     setConvertedAmount(convertedAmount)
@@ -111,7 +122,7 @@ export function Form() {
             </p>
           )}
           <p className={styles.form__rate}>
-            1 {form.baseCurrency} = {rates[form.convertTo]} {form.convertTo}
+            1 {form.baseCurrency} = {rates?.[form.convertTo]} {form.convertTo}
           </p>
         </div>
         <div className={styles.form__info}>
