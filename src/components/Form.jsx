@@ -7,6 +7,8 @@ import { useRates } from '../hooks/useRates'
 import { Label } from './Label'
 import { Select } from './Select'
 import { Input } from './Input'
+import { SwapCurrency } from './Icons'
+import { Button } from './Button'
 
 export function Form() {
   const id = useId()
@@ -45,12 +47,15 @@ export function Form() {
     updateRates({ baseCurrency })
   }, [form.baseCurrency])
 
+  const handleSwap = (event) => {
+    event.preventDefault()
+  }
+
   return (
     <>
       <form className={styles.form}>
         <div>
           <Label htmlFor={`${id}-amount`}>Amount</Label>
-
           <Input
             name="amount"
             id={`${id}-amount`}
@@ -58,6 +63,7 @@ export function Form() {
             onChange={handleAmountChange}
           ></Input>
         </div>
+
         <div>
           <Label htmlFor={`${id}-baseCurrency`}>From</Label>
           <Select
@@ -73,7 +79,11 @@ export function Form() {
             ))}
           </Select>
         </div>
-        <button>ss</button>
+
+        <Button onClick={handleSwap}>
+          <SwapCurrency />
+        </Button>
+
         <div>
           <Label htmlFor={`${id}-convertTo`}>To</Label>
           <Select
@@ -91,15 +101,20 @@ export function Form() {
         </div>
       </form>
 
-      {form && (
-        <h1>
-          {form.amount} {form.baseCurrency} = {convertedAmount} {form.convertTo}
-        </h1>
-      )}
-
-      <p>
-        1 {form.baseCurrency} = {rates[form.convertTo]} {form.convertTo}
-      </p>
+      <section>
+        <div>
+          {form && (
+            <p className={styles.form__result}>
+              {form.amount} {form.baseCurrency} = {convertedAmount}{' '}
+              {form.convertTo}
+            </p>
+          )}
+          <p className={styles.form__footer}>
+            1 {form.baseCurrency} = {rates[form.convertTo]} {form.convertTo}
+          </p>
+        </div>
+        <div></div>
+      </section>
     </>
   )
 }
