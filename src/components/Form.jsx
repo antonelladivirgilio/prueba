@@ -43,6 +43,11 @@ export function Form() {
     validateNumberInput({ target })
   }
 
+  const handleUpdateFormValues = (event) => {
+    const { name, value } = event.target
+    updateFormValues({ name, value })
+  }
+
   useEffect(() => {
     const updatedState = {
       amount: form.amount,
@@ -68,6 +73,9 @@ export function Form() {
 
   const handleSwap = (event) => {
     event.preventDefault()
+
+    updateFormValues({ name: 'convertTo', value: form.baseCurrency })
+    updateFormValues({ name: 'baseCurrency', value: form.convertTo })
   }
 
   return (
@@ -89,7 +97,7 @@ export function Form() {
             id={`${id}-baseCurrency`}
             name="baseCurrency"
             value={form.baseCurrency}
-            onChange={updateFormValues}
+            onChange={handleUpdateFormValues}
           >
             {currencies.map((currency) => (
               <option key={`from-${currency.code}`} value={currency.code}>
@@ -109,7 +117,7 @@ export function Form() {
             id={`${id}-convertTo`}
             name="convertTo"
             value={form.convertTo}
-            onChange={updateFormValues}
+            onChange={handleUpdateFormValues}
           >
             {currencies.map((currency) => (
               <option key={`to-${currency.code}`} value={currency.code}>

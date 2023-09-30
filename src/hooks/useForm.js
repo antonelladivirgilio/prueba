@@ -13,9 +13,8 @@ export function useForm(initialState) {
     })
   }
 
-  const updateFormValues = ({ target }) => {
-    const { name, value } = target
-    setForm({ ...form, [name]: value })
+  const updateFormValues = ({ name, value }) => {
+    setForm((formValues) => ({ ...formValues, [name]: value }))
   }
 
   return { form, validateNumberInput, updateFormValues }
