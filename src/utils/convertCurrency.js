@@ -7,5 +7,5 @@ export const convertCurrency = ({
   const from = fromCurrency
   const to = toCurrency
 
-  return ((amount * to) / from).toFixed(2)
+  return (amount * to) / from
 }
