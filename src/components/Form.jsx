@@ -6,6 +6,7 @@ import { convertCurrency } from '../utils/convertCurrency'
 import { useRates } from '../hooks/useRates'
 import { Label } from './Label'
 import { Select } from './Select'
+import { Input } from './Input'
 
 export function Form() {
   const id = useId()
@@ -50,12 +51,12 @@ export function Form() {
         <div>
           <Label htmlFor={`${id}-amount`}>Amount</Label>
 
-          <input
+          <Input
             name="amount"
             id={`${id}-amount`}
             value={form.amount}
             onChange={handleAmountChange}
-          />
+          ></Input>
         </div>
         <div>
           <Label htmlFor={`${id}-baseCurrency`}>From</Label>
