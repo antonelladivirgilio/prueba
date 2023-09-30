@@ -4,11 +4,10 @@ import { Header } from './components/Header'
 import { Main } from './components/Main'
 
 function App() {
-  const bannerContent = `Titulo de la pagina`
   return (
     <div className={styles.container}>
       <Header text="Currency exchange" />
-      <Main bannerContent={bannerContent}>
+      <Main>
         <Form />
       </Main>
     </div>
