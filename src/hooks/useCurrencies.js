@@ -9,7 +9,7 @@ export function useCurrencies() {
   const handleGetCurrencies = async () => {
     const { currencies, currenciesObj } = await getCurrencies()
 
-    updateCurrencyStore({ currencies: currenciesObj })
+    updateCurrencyStore({ currenciesObj })
     setCurrencies(currencies)
   }
 

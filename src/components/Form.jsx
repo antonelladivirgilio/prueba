@@ -14,8 +14,13 @@ import { useCurrencyStore } from '../hooks/useCurrencyStore'
 
 export function Form() {
   const id = useId()
-  const { amount, baseCurrency, convertTo, updateCurrencyStore } =
-    useCurrencyStore()
+  const {
+    amount,
+    baseCurrency,
+    convertTo,
+    currenciesObj,
+    updateCurrencyStore
+  } = useCurrencyStore()
   const initialState = {
     amount,
     baseCurrency,
@@ -25,6 +30,11 @@ export function Form() {
   const { form, validateNumberInput, updateFormValues } = useForm(initialState)
   const { currencies } = useCurrencies()
   const { rates, updateRates } = useRates()
+
+  const baseCurrencyName = currenciesObj[baseCurrency]?.name
+  const baseCurrencyValue = rates?.[form.baseCurrency]
+  const convertToName = currenciesObj[convertTo]?.name
+  const convertToValue = rates?.[form.convertTo]
 
   const [convertedAmount, setConvertedAmount] = useState(0)
 
@@ -41,9 +51,6 @@ export function Form() {
     }
 
     updateCurrencyStore({ ...updatedState })
-
-    const baseCurrencyValue = rates?.[form.baseCurrency]
-    const convertToValue = rates?.[form.convertTo]
 
     const convertedAmount = convertCurrency({
       amountToConvert: form.amount,
@@ -117,12 +124,11 @@ export function Form() {
         <div>
           {form && (
             <p className={styles.form__amount}>
-              {form.amount} {form.baseCurrency} = {convertedAmount}{' '}
-              {form.convertTo}
+              {`${form.amount} ${baseCurrencyName} = ${convertedAmount} ${convertToName}`}
             </p>
           )}
           <p className={styles.form__rate}>
-            1 {form.baseCurrency} = {rates?.[form.convertTo]} {form.convertTo}
+            {`1 ${form.baseCurrency} = ${convertToValue} ${form.convertTo}`}
           </p>
         </div>
         <div className={styles.form__info}>

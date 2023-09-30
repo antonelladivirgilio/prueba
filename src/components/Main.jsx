@@ -3,10 +3,10 @@ import { Footer } from './Footer'
 import styles from './Main.module.css'
 
 export function Main({ children }) {
-  const { amount, baseCurrency, convertTo, currencies } = useCurrencyStore()
+  const { amount, baseCurrency, convertTo, currenciesObj } = useCurrencyStore()
 
-  const baseCurrencyName = currencies[baseCurrency]?.name
-  const convertToName = currencies[convertTo]?.name
+  const baseCurrencyName = currenciesObj[baseCurrency]?.name
+  const convertToName = currenciesObj[convertTo]?.name
 
   return (
     <main className={styles.card}>

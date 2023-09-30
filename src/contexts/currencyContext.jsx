@@ -7,7 +7,7 @@ export const CurrencyProvider = ({ children }) => {
     amount: 1,
     baseCurrency: 'USD',
     convertTo: 'EUR',
-    currencies: {}
+    currenciesObj: {}
   }
 
   const [currencyStore, setCurrencyStore] = useState(initialState)
