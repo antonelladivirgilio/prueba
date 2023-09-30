@@ -6,7 +6,7 @@ export function Main({ bannerContent, children }) {
       <div className={styles.card__banner}>
         <div>{bannerContent}</div>
       </div>
-      <div className={styles.card__content}>{children}</div>
+      <section className={styles.card__content}>{children}</section>
       <footer className={styles.card__footer}>algo</footer>
     </main>
   )
