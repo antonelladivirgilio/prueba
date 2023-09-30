@@ -1,7 +1,6 @@
 .select__container {
   display: grid;
   grid-template-columns: auto 1rem 1rem;
-  position: relative
 }
 
 .select {
@@ -12,7 +11,7 @@
   background-color: var(--clr-white-100);
   border: 1px solid var(--clr-light-gray-100);
   border-radius: 4px;
-  padding: 10px 45px 10px 14px;
+  padding: 8px 45px 8px 14px;
   cursor: pointer;
 
   grid-column: 1 / -1;

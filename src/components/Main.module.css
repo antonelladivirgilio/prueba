@@ -2,6 +2,8 @@
   display: grid;
   grid-template-columns: 2rem auto 2rem;
   grid-template-rows: repeat(3, auto);
+
+  place-items: center;
 }
 
 .card__banner {
@@ -16,27 +18,25 @@
 }
 
 .card__banner div {
-    grid-column: 2 / 3;
-    padding-block: 3rem;
-    color: var(--clr-white-100);
-    font-size: var(--text-2xl);
-    font-weight: 600;
+  grid-column: 2 / 3;
+  padding-block: 3rem;
+  color: var(--clr-white-100);
+  font-size: var(--text-2xl);
+  font-weight: 600;
 }
 
 .card__content {
   background-color: var(--clr-white-100);
-  grid-column: 2 / 3;
-  grid-row: 2 / 4;
-
   border-radius: 8px;
   box-shadow: var(--box-shadow-10);
   padding: 2rem;
+
+  grid-column: 2 / 3;
+  grid-row: 2 / 4;
 }
 
 .card__footer {
-    grid-column: 1 / -1;
+  grid-column: 1 / -1;
 
-    display: grid;
-    
-    text-align: right;
+  display: grid;
 }
