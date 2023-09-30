@@ -101,19 +101,28 @@ export function Form() {
         </div>
       </form>
 
-      <section>
+      <section className={styles.form__result}>
         <div>
           {form && (
-            <p className={styles.form__result}>
+            <p className={styles.form__amount}>
               {form.amount} {form.baseCurrency} = {convertedAmount}{' '}
               {form.convertTo}
             </p>
           )}
-          <p className={styles.form__footer}>
+          <p className={styles.form__rate}>
             1 {form.baseCurrency} = {rates[form.convertTo]} {form.convertTo}
           </p>
         </div>
-        <div></div>
+        <div className={styles.form__info}>
+          <p className={styles.form__popover}>
+            We use the mid-market rate for our Converter. This is for
+            informational purposes only. You won’t receive this rate when
+            sending money.
+          </p>
+          <p className={styles.form__credits}>
+            Euro to US Dollar conversion — Last updated Dec 15, 2022, 19:17 UTC
+          </p>
+        </div>
       </section>
     </>
   )

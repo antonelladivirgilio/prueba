@@ -1,4 +1,5 @@
-import './App.css'
+import styles from './App.module.css'
+import { Footer } from './components/Footer'
 import { Form } from './components/Form'
 import { Header } from './components/Header'
 import { Main } from './components/Main'
@@ -6,12 +7,13 @@ import { Main } from './components/Main'
 function App() {
   const bannerContent = `Titulo de la pagina`
   return (
-    <>
+    <div className={styles.container}>
       <Header text="Currency exchange" />
       <Main bannerContent={bannerContent}>
         <Form />
       </Main>
-    </>
+      <Footer />
+    </div>
   )
 }
 
