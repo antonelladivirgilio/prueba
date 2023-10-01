@@ -1,8 +1,8 @@
 import styles from './Form.module.css'
 import { useEffect, useId, useState } from 'react'
-import { useForm } from '../hooks/useForm'
+import { useCurrencyStore } from '../hooks/useCurrencyStore'
 import { useCurrencies } from '../hooks/useCurrencies'
-import { convertCurrency } from '../utils/convertCurrency'
+import { useForm } from '../hooks/useForm'
 import { useRates } from '../hooks/useRates'
 import { Label } from './Label'
 import { Select } from './Select'
@@ -10,7 +10,7 @@ import { Input } from './Input'
 import { SwapCurrency } from './Icons'
 import { Button } from './Button'
 import { Footer } from './Footer'
-import { useCurrencyStore } from '../hooks/useCurrencyStore'
+import { convertCurrency } from '../utils/convertCurrency'
 
 export function Form() {
   const id = useId()
@@ -33,6 +33,7 @@ export function Form() {
 
   const baseCurrencyName = currenciesObj[baseCurrency]?.name
   const baseCurrencyValue = rates?.[form.baseCurrency]
+  const baseCurrencySymbol = currenciesObj[baseCurrency]?.symbol
   const convertToName = currenciesObj[convertTo]?.name
   const convertToValue = rates?.[form.convertTo]
 
@@ -88,6 +89,7 @@ export function Form() {
             id={`${id}-amount`}
             value={form.amount}
             onChange={handleAmountChange}
+            prefix={baseCurrencySymbol}
           ></Input>
         </div>
 

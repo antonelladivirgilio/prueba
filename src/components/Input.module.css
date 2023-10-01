@@ -1,10 +1,32 @@
-.input {
+.input__container {
+  display: grid;
+  grid-template-columns: 3rem auto;
+  align-items: center;
+
+  border: 1px solid var(--clr-light-gray-100);
+  border-radius: 4px;
+}
+
+.input__prefix {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+
   font-family: var(--ff-primary);
   font-size: var(--text-base);
   font-weight: 600;
+  padding-left: 10px;
+}
+
+.input {
+  grid-column: 1 / -1;
+  grid-row: 1 / 2;
+
+  font-family: var(--ff-primary);
+  font-size: var(--text-base);
+  font-weight: 600;
+  border: none;
+  background: none;  
   color: var(--clr-black-100);
-  padding: 9px 14px;
-  border: 1px solid var(--clr-light-gray-100);
-  border-radius: 4px;
+  padding: 9px 14px 9px 3rem; 
   width: 100%;
 }
