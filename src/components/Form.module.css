@@ -18,6 +18,7 @@
   font-size: var(--text-2xl);
   font-weight: 600;
   color: var(--clr-black-100);
+  min-height: 100px;
 }
 
 .form__rate {
