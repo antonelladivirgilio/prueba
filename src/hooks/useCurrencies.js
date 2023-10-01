@@ -5,17 +5,27 @@ import { useCurrencyStore } from './useCurrencyStore'
 export function useCurrencies() {
   const { updateCurrencyStore } = useCurrencyStore()
   const [currencies, setCurrencies] = useState([])
+  const [errorCurrencies, setErrorCurrencies] = useState(false)
+  const [loadingCurrencies, setLoadingCurrencies] = useState(false)
 
   const handleGetCurrencies = async () => {
-    const { currencies, currenciesObj } = await getCurrencies()
+    try {
+      setLoadingCurrencies(true)
+      setErrorCurrencies(false)
+      const { currencies, currenciesObj } = await getCurrencies()
 
-    updateCurrencyStore({ currenciesObj })
-    setCurrencies(currencies)
+      updateCurrencyStore({ currenciesObj })
+      setCurrencies(currencies)
+    } catch (error) {
+      setErrorCurrencies(true)
+    } finally {
+      setLoadingCurrencies(false)
+    }
   }
 
   useEffect(() => {
     handleGetCurrencies()
   }, [])
 
-  return { currencies, handleGetCurrencies }
+  return { currencies, handleGetCurrencies, errorCurrencies, loadingCurrencies }
 }
