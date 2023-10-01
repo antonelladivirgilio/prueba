@@ -11,6 +11,7 @@ import { SwapCurrency } from './Icons'
 import { Button } from './Button'
 import { Footer } from './Footer'
 import { convertCurrency } from '../utils/convertCurrency'
+import { Feedback } from './Feedback'
 
 export function Form() {
   const id = useId()
@@ -29,15 +30,18 @@ export function Form() {
 
   const { form, validateNumberInput, updateFormValues } = useForm(initialState)
   const { currencies } = useCurrencies()
-  const { rates, updateRates } = useRates()
+  const { rates, updateRates, erroRates, loadingRates } = useRates()
 
   const baseCurrencyName = currenciesObj[baseCurrency]?.name
   const baseCurrencyValue = rates?.[form.baseCurrency]
   const baseCurrencySymbol = currenciesObj[baseCurrency]?.symbol
   const convertToName = currenciesObj[convertTo]?.name
   const convertToValue = rates?.[form.convertTo]
-
-  const [convertedAmount, setConvertedAmount] = useState(0)
+  const convertedAmount = convertCurrency({
+    amountToConvert: form.amount,
+    fromCurrency: baseCurrencyValue,
+    toCurrency: convertToValue
+  })
 
   const handleAmountChange = (event) => {
     const { target } = event
@@ -57,14 +61,6 @@ export function Form() {
     }
 
     updateCurrencyStore({ ...updatedState })
-
-    const convertedAmount = convertCurrency({
-      amountToConvert: form.amount,
-      fromCurrency: baseCurrencyValue,
-      toCurrency: convertToValue
-    })
-
-    setConvertedAmount(convertedAmount)
   }, [form])
 
   useEffect(() => {
@@ -132,11 +128,19 @@ export function Form() {
 
       <section className={styles.form__result}>
         <div>
-          {form && (
-            <p className={styles.form__amount}>
-              {`${form.amount} ${baseCurrencyName} = ${convertedAmount} ${convertToName}`}
-            </p>
-          )}
+          <p className={styles.form__amount}>
+            {erroRates && (
+              <Feedback type="error">
+                No se puedo realizar la conversión
+              </Feedback>
+            )}
+
+            {!loadingRates && !erroRates && (
+              <>
+                {`${form.amount} ${baseCurrencyName} = ${convertedAmount} ${convertToName}`}
+              </>
+            )}
+          </p>
           <p className={styles.form__rate}>
             {`1 ${form.baseCurrency} = ${convertToValue} ${form.convertTo}`}
           </p>
