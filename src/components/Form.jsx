@@ -30,7 +30,7 @@ export function Form() {
 
   const { form, validateNumberInput, updateFormValues } = useForm(initialState)
   const { currencies } = useCurrencies()
-  const { rates, updateRates, erroRates, loadingRates } = useRates()
+  const { rates, updateRates, errorRates, loadingRates } = useRates()
 
   const baseCurrencyName = currenciesObj[baseCurrency]?.name
   const baseCurrencyValue = rates?.[form.baseCurrency]
@@ -129,19 +129,20 @@ export function Form() {
       <section className={styles.form__result}>
         <div>
           <p className={styles.form__amount}>
-            {erroRates && (
+            {errorRates && (
               <Feedback type="error">
                 No se puedo realizar la conversión
               </Feedback>
             )}
 
-            {!loadingRates && !erroRates && (
+            {!loadingRates && !errorRates && (
               <>
                 {`${form.amount} ${baseCurrencyName} = ${convertedAmount} ${convertToName}`}
               </>
             )}
           </p>
           <p className={styles.form__rate}>
+            {/* Aca si no existe convertToValue se muestra undefined */}
             {`1 ${form.baseCurrency} = ${convertToValue} ${form.convertTo}`}
           </p>
         </div>
