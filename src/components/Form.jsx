@@ -43,6 +43,8 @@ export function Form() {
     toCurrency: convertToValue
   })
 
+  const convertionError = errorRates || !convertToValue
+
   const handleAmountChange = (event) => {
     const { target } = event
     validateNumberInput({ target })
@@ -105,7 +107,7 @@ export function Form() {
           </Select>
         </div>
 
-        <Button onClick={handleSwap} disabled={errorRates}>
+        <Button onClick={handleSwap}>
           <SwapCurrency />
         </Button>
 
@@ -129,13 +131,13 @@ export function Form() {
       <section className={styles.form__result}>
         <div>
           <p className={styles.form__amount}>
-            {errorRates && (
+            {convertionError && (
               <Feedback type="error">
                 No se pudo realizar la conversión
               </Feedback>
             )}
 
-            {!loadingRates && !errorRates && (
+            {!loadingRates && !convertionError && (
               <>
                 {`${form.amount} ${baseCurrencyName} = ${convertedAmount} ${convertToName}`}
                 <span className={styles.form__rate}>
