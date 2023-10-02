@@ -10,9 +10,11 @@ You can see the app working on https://currency-exchange-ppi.netlify.app/
 3. Run Build
 
 ## Installation and Setup Instructions
-1. Use the package manager script to install the dependencies `npm install` or `npm i`
-2. Start the development server `npm run dev`  
-3. Visit the App `http://localhost:5173/`  
+1. Clone the repo `git clone https://github.com/antonelladivirgilio/prueba`
+2. Run in your terminal `cd prueba` to enter the project folder
+3. Use the package manager script to install the dependencies `npm install` or `npm i`
+4. Start the development server `npm run dev`  
+5. Visit the App `http://localhost:5173/`  
 
 ## Running E2E Test
 **_NOTE:_** it is important to have the app running on localhost to run the E2E tests
