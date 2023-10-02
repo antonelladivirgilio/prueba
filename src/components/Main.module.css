@@ -43,6 +43,7 @@
   box-shadow: var(--box-shadow-10);
   padding: 2rem;
   max-width: 1126px;
+  margin-bottom: 30px;
 }
 
 .card__footer {
