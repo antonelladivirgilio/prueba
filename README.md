@@ -39,7 +39,7 @@ You can see the app working on https://currency-exchange-ppi.netlify.app/
 
     * for Chrome: `npm run cy:run:chrome`
     * for Firefox: `npm run cy:run:firefox`
-    * for Webkit (IOS Support):`npm run cy:run:webkit`
+    * for Webkit (IOS Support): `npm run cy:run:webkit`
 
 2. Run one script and wait for the test to be completed
 
