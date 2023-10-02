@@ -4,7 +4,9 @@ import App from './App.jsx'
 import './index.css'
 import { CurrencyProvider } from './contexts/currencyContext.jsx'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById('root'), {
+  identifierPrefix: 'currency-exchange-app-'
+}).render(
   <React.StrictMode>
     <CurrencyProvider>
       <App />
