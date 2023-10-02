@@ -7,9 +7,9 @@
 }
 
 .select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+  background: unset;
+  -webkit-appearance: initial;
+  appearance: initial;
   font-family: var(--ff-primary);
   font-size: var(--text-base);
   font-weight: 600;
