@@ -1,5 +1,5 @@
 import styles from './Form.module.css'
-import { useEffect, useId, useState } from 'react'
+import { useEffect, useId } from 'react'
 import { useCurrencyStore } from '../hooks/useCurrencyStore'
 import { useCurrencies } from '../hooks/useCurrencies'
 import { useForm } from '../hooks/useForm'
@@ -105,7 +105,7 @@ export function Form() {
           </Select>
         </div>
 
-        <Button onClick={handleSwap}>
+        <Button onClick={handleSwap} disabled={errorRates}>
           <SwapCurrency />
         </Button>
 
@@ -138,12 +138,11 @@ export function Form() {
             {!loadingRates && !errorRates && (
               <>
                 {`${form.amount} ${baseCurrencyName} = ${convertedAmount} ${convertToName}`}
+                <span className={styles.form__rate}>
+                  {`1 ${form.baseCurrency} = ${convertToValue} ${form.convertTo}`}
+                </span>
               </>
             )}
-          </p>
-          <p className={styles.form__rate}>
-            {/* Aca si no existe convertToValue se muestra undefined */}
-            {`1 ${form.baseCurrency} = ${convertToValue} ${form.convertTo}`}
           </p>
         </div>
         <div className={styles.form__info}>
