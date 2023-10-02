@@ -37,13 +37,16 @@ export function Form() {
   const baseCurrencySymbol = currenciesObj[baseCurrency]?.symbol
   const convertToName = currenciesObj[convertTo]?.name
   const convertToValue = rates?.[form.convertTo]
-  const convertedAmount = convertCurrency({
+  const convertionError = errorRates || !convertToValue
+
+  const convertAmount = convertCurrency({
     amountToConvert: form.amount,
     fromCurrency: baseCurrencyValue,
     toCurrency: convertToValue
   })
 
-  const convertionError = errorRates || !convertToValue
+  const convertedAmount = isNaN(convertAmount) ? 0 : convertAmount
+  const inputAmount = form.amount ? form.amount : 0
 
   const handleAmountChange = (event) => {
     const { target } = event
@@ -139,7 +142,8 @@ export function Form() {
 
             {!loadingRates && !convertionError && (
               <>
-                {`${form.amount} ${baseCurrencyName} = ${convertedAmount} ${convertToName}`}
+                {`${inputAmount} ${baseCurrencyName} = ${convertedAmount} ${convertToName}`}
+
                 <span className={styles.form__rate}>
                   {`1 ${form.baseCurrency} = ${convertToValue} ${form.convertTo}`}
                 </span>
