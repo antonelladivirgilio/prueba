@@ -32,11 +32,13 @@ You can see the app working on https://currency-exchange-ppi.netlify.app/
     There are 5 browser options to run the test:
     * Chrome
     * Edge
-    * Firefox
     * Electron
+    * Firefox
     * Webkit (to check IOS Support)
     
-2. Select one option and wait for the test to be completed
+4. Select one option and smash the `Start E2E Testing in {yourBrowserSelection}` button
+5. Click on `currency_exchange_app.cy.js` and enjoy watching the tests running
+6. After the test has finished, you can switch the browser selection to run the test in others browsers
 
 ### Running E2E test in the terminal
 1. There are 3 scripts to run the tests in the terminal and each script runs the tests for the different browsers
