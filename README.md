@@ -25,7 +25,9 @@ You can see the app working on https://currency-exchange-ppi.netlify.app/
     * Run the tests in the terminal
     
 ### Running E2E tests with the cypress interface
-1. Run the script `npm run cy:open` to open the Cypress interface. After the interface is open. You will be able to select the browser in which you want to run the tests.
+1. Run the script `npm run cy:open` to open the Cypress interface. 
+2. After the interface is open select `E2E Testing`. 
+3. You will be able to select the browser in which you want to run the tests.
 
     There are 5 browser options to run the test:
     * Chrome
