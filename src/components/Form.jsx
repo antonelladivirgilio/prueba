@@ -131,7 +131,7 @@ export function Form() {
           <p className={styles.form__amount}>
             {errorRates && (
               <Feedback type="error">
-                No se puedo realizar la conversión
+                No se pudo realizar la conversión
               </Feedback>
             )}
 
